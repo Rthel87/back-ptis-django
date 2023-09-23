@@ -39,7 +39,7 @@ class Student(models.Model):
 
 class Stakeholder(models.Model):
     iniciales = models.CharField(max_length=3)
-    usuario = models.ForeingKey(Usuario)
+    user = models.ForeingKey(User)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(Group)
@@ -51,3 +51,37 @@ class WorkingDay(models.Model):
     deleted_at = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
+class Semester(models.Model):
+    numero = models.IntegerField()
+    agno = models.IntegerField()
+    inicio = models.DateField()
+    fin = models.DateField()
+    borrado = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Course(models.Model):
+    nombre = models.CharField(max_length=254)
+    codigo = models.CharField(max_length=3)
+    borrado = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Teacher(models.Model):
+    user = models.ForeingKey(User)
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+
+class Section(models.Model):
+    codigo = models.CharField(10)
+    borrado = models.BooleanField(default=False)
+    deleted_at = models.DateTimeField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
+    working_day = models.ForeingKey(WorkingDay)
+    semester = models.ForeingKey(Semester)
+    course = models.ForeingKey(Course)
+    teachers = models.ManyToManyField(Teacher)
