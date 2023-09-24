@@ -6,7 +6,7 @@ class Rol(models.Model):
     rango = models.IntegerField()
     borrado = models.BooleanField()
     deleted_at = models.DateTimeField()
-    created_at: = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class User(models.Model):
@@ -16,7 +16,7 @@ class User(models.Model):
     run = models.CharField(max_length=12)
     correo_elec = models.EmailField(max_length=254)
     password = models.CharField(max_length=254)
-    rol = models.ForeingKey(Rol)
+    rol = models.ForeignKey(Rol, on_delete=models.PROTECT)
     borrado = models.BooleanField(default=False)
     deleted_at = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
@@ -33,13 +33,13 @@ class Group(models.Model):
 
 class Student(models.Model):
     iniciales = models.CharField(max_length=3)
-    usuario = models.ForeingKey(Usuario)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Stakeholder(models.Model):
     iniciales = models.CharField(max_length=3)
-    user = models.ForeingKey(User)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(Group)
@@ -71,17 +71,17 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Teacher(models.Model):
-    user = models.ForeingKey(User)
+    user = models.ForeignKey(User, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Section(models.Model):
-    codigo = models.CharField(10)
+    codigo = models.CharField(max_length=10)
     borrado = models.BooleanField(default=False)
     deleted_at = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-    working_day = models.ForeingKey(WorkingDay)
-    semester = models.ForeingKey(Semester)
-    course = models.ForeingKey(Course)
+    working_day = models.ForeignKey(WorkingDay, on_delete=models.PROTECT)
+    semester = models.ForeignKey(Semester, on_delete=models.PROTECT)
+    course = models.ForeignKey(Course, on_delete=models.PROTECT)
     teachers = models.ManyToManyField(Teacher)
