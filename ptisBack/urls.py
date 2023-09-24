@@ -16,8 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from ptis.views import ListWorkingDays
+from ptis.views import index
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('ptis.urls'))
+    path('', include('ptis.urls')),
+    path('jornadas/', index)
 ]
