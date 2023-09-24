@@ -3,9 +3,9 @@ from django.db import models
 # Create your models here.
 class Rol(models.Model):
     rol = models.CharField(max_length=200)
-    rango = models.IntegerField()
+    rango = models.IntegerField(unique=True)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -14,11 +14,11 @@ class User(models.Model):
     apellido_paterno = models.CharField(max_length=254)
     apellido_materno = models.CharField(max_length=254)
     run = models.CharField(max_length=12)
-    correo_elec = models.EmailField(max_length=254)
+    correo_elec = models.EmailField(max_length=254, unique=True)
     password = models.CharField(max_length=254)
     rol = models.ForeignKey(Rol, on_delete=models.PROTECT)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -27,7 +27,7 @@ class Group(models.Model):
     proyecto = models.TextField()
     correlativo = models.IntegerField()
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -46,9 +46,9 @@ class Stakeholder(models.Model):
 
 class WorkingDay(models.Model):
     nombre = models.CharField(max_length=254)
-    identificador = models.IntegerField()
+    identificador = models.IntegerField(unique=True)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -57,16 +57,17 @@ class Semester(models.Model):
     agno = models.IntegerField()
     inicio = models.DateField()
     fin = models.DateField()
+    activo = models.BooleanField(default=True)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Course(models.Model):
     nombre = models.CharField(max_length=254)
-    codigo = models.CharField(max_length=3)
+    codigo = models.CharField(max_length=3, unique=True)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -78,7 +79,7 @@ class Teacher(models.Model):
 class Section(models.Model):
     codigo = models.CharField(max_length=10)
     borrado = models.BooleanField(default=False)
-    deleted_at = models.DateTimeField()
+    deleted_at = models.DateTimeField(null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     working_day = models.ForeignKey(WorkingDay, on_delete=models.PROTECT)
