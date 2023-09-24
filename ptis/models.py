@@ -4,7 +4,7 @@ from django.db import models
 class Rol(models.Model):
     rol = models.CharField(max_length=200)
     rango = models.IntegerField()
-    borrado = models.BooleanField()
+    borrado = models.BooleanField(default=False)
     deleted_at = models.DateTimeField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
