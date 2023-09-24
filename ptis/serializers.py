@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Rol
+from .models import Rol, User, Group, Student, Stakeholder, WorkingDay, Semester, Course, Teacher, Section
 
 deletedObj = ('id', 'borrado', 'created_at', 'updated_at', 'deleted_at')
 nonDeletedObj = ('id', 'created_at', 'updated_at')
