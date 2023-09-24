@@ -2,7 +2,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 from rest_framework import permissions
-from .models import WorkingDay
+from .models import WorkingDay, Semester
 
 # Create your views here.
 class ListWorkingDays(APIView):
@@ -18,7 +18,12 @@ class ListWorkingDays(APIView):
 
 
 @api_view(['GET'])
-def index(request):
+def workingDays(request):
     # Work
     workingdays = WorkingDay.objects.filter(borrado=False)
     return Response(workingdays)
+
+@api_view(['GET'])
+def semester(request):
+    semester = Semester.objects.filter(activo=True, borrado=False)
+    return Response(semester)
