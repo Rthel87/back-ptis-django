@@ -5,28 +5,25 @@ from rest_framework import permissions
 from .models import WorkingDay, Semester, Section
 
 # Create your views here.
-class ListWorkingDays(APIView):
+class ListWorkingDays():
     """
     View to list all working days on de sistem
     Don't work
     """
     permission_classes = [permissions.AllowAny]
 
-    def get(self, format=None):
+    @api_view(['GET'])
+    def index(request):
         workingdays = WorkingDay.objects.filter(borrado=False)
-        return Response(workingdays)
+        return Response(workingdays.values())
 
 
-@api_view(['GET'])
-def workingDays(request):
-    # Work
-    workingdays = WorkingDay.objects.filter(borrado=False)
-    return Response(workingdays)
+class ListSemesters():
+    @api_view(['GET'])
+    def index(request):
+        semester = Semester.objects.filter(activo=True, borrado=False)
+        return Response(semester.values())
 
-@api_view(['GET'])
-def semester(request):
-    semester = Semester.objects.filter(activo=True, borrado=False)
-    return Response(semester)
 
 class ListSections():
     permission_classes = [permissions.AllowAny]

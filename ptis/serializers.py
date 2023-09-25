@@ -13,7 +13,7 @@ class RolSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ('id', 'nombre', 'apellido_paterno', 'apellido_materno', 'run', 'correo_elec', 'password', 'rol', 'borrado', 'created_at', 'updated_at', 'deleted_at')
+        fields = ('id', 'nombre', 'apellido_paterno', 'apellido_materno', 'run', 'correo_elec', 'rol', 'borrado', 'created_at', 'updated_at', 'deleted_at')
         read_only_fields = deletedObj
 
 class GroupSerializer(serializers.ModelSerializer):
