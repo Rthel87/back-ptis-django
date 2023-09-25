@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
 class Rol(models.Model):
@@ -9,13 +10,10 @@ class Rol(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-class User(models.Model):
-    nombre = models.CharField(max_length=254)
-    apellido_paterno = models.CharField(max_length=254)
+class UserPtis(models.Model):
     apellido_materno = models.CharField(max_length=254)
     run = models.CharField(max_length=12, null=True)
-    correo_elec = models.EmailField(max_length=254, unique=True)
-    password = models.CharField(max_length=254)
+    auth_user = models.ForeignKey(User, on_delete=models.PROTECT)
     rol = models.ForeignKey(Rol, on_delete=models.PROTECT)
     borrado = models.BooleanField(default=False)
     deleted_at = models.DateTimeField(null=True)
@@ -33,13 +31,13 @@ class Group(models.Model):
 
 class Student(models.Model):
     iniciales = models.CharField(max_length=3)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(UserPtis, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
 class Stakeholder(models.Model):
     iniciales = models.CharField(max_length=3)
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(UserPtis, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     groups = models.ManyToManyField(Group)
@@ -72,7 +70,7 @@ class Course(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
 class Teacher(models.Model):
-    user = models.ForeignKey(User, on_delete=models.PROTECT)
+    user = models.ForeignKey(UserPtis, on_delete=models.PROTECT)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

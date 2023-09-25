@@ -1,0 +1,22 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 100,
+    "fields": {
+      "first_name": "Héctor",
+      "last_name": "Antillanca",
+      "email": "hector.antillanca@usach.cl",
+      "username": "Antillanca"
+    }
+  },
+  {
+    "model": "auth.user",
+    "pk": 200,
+    "fields": {
+      "first_name": "María Carolina",
+      "last_name": "Chamorro",
+      "email": "mcchamorro@gmail.com",
+      "username": "Chamorro"
+    }
+  }
+]
