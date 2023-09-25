@@ -13,7 +13,7 @@ class User(models.Model):
     nombre = models.CharField(max_length=254)
     apellido_paterno = models.CharField(max_length=254)
     apellido_materno = models.CharField(max_length=254)
-    run = models.CharField(max_length=12)
+    run = models.CharField(max_length=12, null=True)
     correo_elec = models.EmailField(max_length=254, unique=True)
     password = models.CharField(max_length=254)
     rol = models.ForeignKey(Rol, on_delete=models.PROTECT)
