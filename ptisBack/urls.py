@@ -16,12 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from ptis.views import ListWorkingDays, ListSemesters, ListSections
+from ptis.views import ListWorkingDays, ListSemesters, ListSections, ListUsers
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('ptis.urls')),
     path('jornadas/', ListWorkingDays.index),
     path('semestres/', ListSemesters.index),
-    path('secciones/', ListSections.index)
+    path('secciones/', ListSections.index),
+    path('auth/login/', ListUsers.login)
 ]
