@@ -51,3 +51,13 @@ class ListUsers():
                 return Response({'error': 'Contraseña errónea'}, status=422)
         except ObjectDoesNotExist:
             return Response({'error': 'No existe el usuario'}, status=422)
+
+    @api_view(['GET'])
+    def user(request):
+        header = request.META['HTTP_AUTHORIZATION']
+        token = header.split()
+        if token[0] != 'Bearer':
+            return Response({'error': ''})
+        
+        # print(header.split())
+        return Response(request.META['HTTP_AUTHORIZATION'])

@@ -24,5 +24,6 @@ urlpatterns = [
     path('jornadas/', ListWorkingDays.index),
     path('semestres/', ListSemesters.index),
     path('secciones/', ListSections.index),
-    path('auth/login/', ListUsers.login)
+    path('auth/login/', ListUsers.login),
+    path('login/user/', ListUsers.user)
 ]
